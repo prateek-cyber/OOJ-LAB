@@ -1,0 +1,128 @@
+import java.util.*;
+class bank{
+}
+class account{
+	String cus_name;
+	int acc_num;
+	String acc_type;
+	account(String cus_name, int acc_num, String acc_type){
+		this.cus_name=cus_name;
+		this.acc_num=acc_num;
+		this.acc_type=acc_type;
+	}
+		void display(){
+		System.out.println("Details of the customer are: \n"+cus_name +acc_num +acc_type);
+	}
+	}
+
+class curr_acct extends account{
+	int amt;
+	int balance;
+	curr_acct(String cus_name, int acc_num, String acc_type){
+		super(cus_name,acc_num,acc_type);
+	}
+		void display(){
+		Scanner in = new Scanner(System.in);
+		System.out.println("Checkbook facility available");
+		System.out.println("Enter initial amount: ");
+		balance=in.nextInt();
+		System.out.println("press 1 for withdrawal\n press 2 for deposit");
+		int choice=in.nextInt();
+		if(choice==1){
+        System.out.println("Enter the amount to be withdrawn: ");
+        amt=in.nextInt();
+        System.out.println("withdrawal of amount "+amt+" was successful");
+        balance=balance-amt;
+        System.out.println("Remaining balance: "+balance);
+}
+        else if(choice==2){	
+		System.out.println("Enter the amount to be added: ");
+        amt=in.nextInt();
+        System.out.println("Amount "+amt+" added successfully");
+        balance=balance+amt;
+        System.out.println("Remaning balance: "+balance);
+    }
+        if(balance<1000){
+        	balance=balance-100;
+        	System.out.println("Service charge of Rs. 100 is imposed\n remaining balance: "+balance);
+
+        }
+}
+		
+	}
+
+
+
+class sav_acct extends account{
+	int amt;
+	int balance;
+	sav_acct(String cus_name, int acc_num, String acc_type){
+    super(cus_name,acc_num,acc_type);
+}
+    void display(){
+    	Scanner in = new Scanner(System.in);
+    System.out.println("Checkbook facility not available");
+    System.out.println("Enter initial amount: ");
+		balance=in.nextInt();
+    System.out.println("press 1 for withdrawal\n press 2 for deposit");
+		int choice=in.nextInt();
+		if(choice==1){
+        System.out.println("Enter the amount to be withdrawn: ");
+        amt=in.nextInt();
+        System.out.println("withdrawal of amount "+amt+" was successful");
+        balance=balance-amt;
+        System.out.println("Remaining balance: "+balance);
+}
+
+        else if(choice==2){	
+		System.out.println("Enter the amount to be added: ");
+        amt=in.nextInt();
+        System.out.println("Amount "+amt+" added successfully");
+        balance=balance+amt;
+        System.out.println("Remaning balance: "+balance);
+    }
+        if(balance<1000){
+        	balance=balance-100;
+        	System.out.println("Service charge of Rs. 100 is imposed\n remaining balance: "+balance);
+
+        }
+        double interest=(balance*1*5)/100;
+        System.out.println("The interest for 1 year is: "+interest);
+}
+		
+
+	}
+
+
+class lab4_bank{
+	public static void main(String args[]){
+		Scanner in = new Scanner(System.in);
+		for(;;){
+		System.out.println("Enter customer name: ");
+		String name=in.nextLine();
+
+		System.out.println("Enter the account type: ");
+		String type=in.nextLine();
+		
+		System.out.println("Enter account number: ");
+		int num=in.nextInt();
+
+		
+		account acc = new account(name,num,type);
+		
+		
+		curr_acct curr=new curr_acct(name,num,type);
+		sav_acct sav = new sav_acct(name,num,type);
+        account ac;
+		acc.display();
+		if(type.equals("current")){
+         ac=curr;
+         ac.display();
+		}
+		else if(type.equals("savings")){
+			ac=sav;
+			ac.display();
+		}
+		}
+	}
+}
